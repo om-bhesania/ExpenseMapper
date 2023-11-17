@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.balance {
+  width: 14em;
+  height: 5em;
+}
+
+.balCard {
+  background-color: rgba(163, 72, 47, 0.8941176471) !important;
+}
+
+.incomeCard {
+  background-color: rgba(0, 255, 55, 0.794) !important;
+}
+
+.expenseCard {
+  background-color: rgba(255, 0, 0, 0.704) !important;
+}/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,28 @@
+@use '../../assets/scss/variables'as var;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.balance {
+    width: 14em;
+    height: 5em;
+
+}
+
+.balCard {
+    background-color: var.$accentTranslucent !important;
+}
+
+.incomeCard {
+    background-color: var.$greenTransclucent !important;
+}
+
+.expenseCard {
+    background-color: var.$redTransclucent !important;
+}

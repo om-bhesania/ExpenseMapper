@@ -1,0 +1,85 @@
+@use '../../assets/scss/variables'as var;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+
+    .signIn {
+        width: 30%;
+        height: 3em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4%;
+
+    }
+}
+
+.signInButton {
+    width: 10em;
+    height: 3em;
+    border: 1px solid var.$accent;
+    color: var.$accent;
+    transition: var.$transition;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    @include var.breakpoint(md) {
+        border: 1px solid var.$white;
+        color: var.$primary;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @include var.breakpoint(sm) {
+        border: 1px solid var.$white;
+        color: var.$white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @include var.breakpoint(xs) {
+        border: 1px solid var.$white;
+        color: var.$white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &:hover {
+        background: transparent;
+        box-shadow: rgba(237, 125, 84, 0.4) 5px 5px, rgba(237, 125, 84, 0.3) 10px 10px, rgba(237, 125, 84, 0.2) 15px 15px, rgba(237, 125, 84, 0.1) 20px 20px, rgba(237, 125, 84, 0.05) 25px 25px;
+    }
+
+    .text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        p {
+            font-size: 1.1em;
+        }
+
+    }
+
+
+}

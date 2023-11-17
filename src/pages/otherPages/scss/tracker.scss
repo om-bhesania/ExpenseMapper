@@ -1,0 +1,163 @@
+@use "../../../assets/scss/variables"as var;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mainContainer {
+    height: 100vh;
+    width: 92%;
+    margin: auto;
+
+    .headerText {
+        height: 10%;
+        width: 80%;
+        margin: auto;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var.$primary;
+        font-size: var.$fontSizeHeading;
+        font-family: var.$primaryFont;
+
+        @include var.breakpoint(xs) {
+            font-size: 0.8rem;
+        }
+
+        @include var.breakpoint(sm) {
+            font-size: 1rem;
+        }
+
+        span {
+            color: var.$accent;
+            font-family: var.$primaryFont;
+        }
+    }
+
+    .FormWrapper {
+        width: 100%;
+        height: 100%;
+        margin-top: 2%;
+
+        @include var.breakpoint(sm) {
+            border: none;
+        }
+
+        @include var.breakpoint(md) {
+            border: none;
+        }
+
+        form {
+            height: 80vh;
+            width: 80%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 3.5em;
+            font-family: var.$primary;
+            border: 2px dashed var.$accent;
+            transition: var.$transition;
+
+            @include var.breakpoint(xs) {
+                width: 90%;
+                border: none;
+            }
+            @include var.breakpoint(sm) {
+                width: 90%;
+                border: none;
+            }
+
+            @include var.breakpoint(md) {
+                width: 70%;
+                border: none;
+            }
+
+            @include var.breakpoint(lg) {
+                width: 60%;
+
+            }
+
+            #labelHeaders {
+                font-weight: 600;
+            }
+
+            .desc,
+            .amount,
+            .category,
+            .customCategoryContainer {
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+
+                @include var.breakpoint(xs) {
+                    width: 75%;
+                }
+
+                @include var.breakpoint(sm) {
+                    width: 75%;
+                }
+
+                @include var.breakpoint(md) {
+                    width: 80%;
+                }
+
+                @include var.breakpoint(lg) {
+                    width: 60%;
+                }
+            }
+
+
+
+            input[type=radio] {
+                width: 1.7em;
+                height: 1.7em;
+            }
+
+            input[type=text],
+            [type=number] {
+                width: 100%;
+                height: 2rem;
+                color: var.$primary;
+                border: none;
+                border-bottom: 2px solid var.$accent;
+                padding: 0.5rem;
+                transition: var.$activeTransition;
+                outline: none;
+
+                &:focus {
+                    outline: none;
+                    border-bottom: 1px solid var.$accent2;
+
+                }
+
+                -moz-appearance: textfield;
+
+                &::-webkit-inner-spin-button,
+                &::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+
+                button {
+                    background-color: var.$accent;
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: var.$accent2;
+                    }
+                }
+            }
+        }
+    }
+}
