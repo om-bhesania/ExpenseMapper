@@ -3,7 +3,7 @@ import './navbar.css'
 import { useRef, useState, useEffect } from 'react';
 import { auth } from '../../config/firebase-config'
 import { signOut } from 'firebase/auth'
-
+import logo from '../../assets/logo.png'
 import { useGetUserInfo } from "../../hooks/useGetUserInfo"
 import {
     Box,
@@ -14,6 +14,7 @@ import {
     PopoverTrigger,
     Avatar,
     useToast,
+    Image,
 } from '@chakra-ui/react';
 import Auth from '../../pages/auth';
 
@@ -74,6 +75,9 @@ const Navbar = () => {
             setShowDropdown(false);
         }
     };
+    const handleNavClose = () => {
+        setClicked(false);
+    }
 
     useEffect(() => {
         // Attach the event listener when the component mounts
@@ -84,21 +88,23 @@ const Navbar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+
     return (
         <>
             <Box className="wrappper" ref={wrapperRef}>
                 <nav>
-                    <NavLink to="/" id="logo">
-                        ExpenseMapper
+                    <NavLink to='/' id="logo" onClick={handleNavClose}>
+                        <Image src={logo} w={{ base: '80%', md: '76%' }} h={{ base: '1.2em', md: '1.4em' }} ml={{ md: '2em', base: '1em' }} ></Image>
                     </NavLink>
                     <ul className={clicked ? 'navLinks active' : 'navLinks '} id='navbar'>
                         <li id='links'>
-                            <NavLink to="/">Home</NavLink>
+                            <NavLink to='/' onClick={handleNavClose}>Home</NavLink>
                         </li>
                         {picture && (
                             <>
-                                <li id='links'>
-                                    <NavLink to="/dashboard">Dashboard</NavLink>
+                                <li id='links' >
+                                    <NavLink to='/dashboard' onClick={handleNavClose}>Dashboard</NavLink>
                                 </li>
                             </>
                         )}
@@ -109,7 +115,7 @@ const Navbar = () => {
                             <NavLink to="/tracker" onClick={handleTrackerClick}>Tracker</NavLink>
                         </li>
                         <li id='links'>
-                            <NavLink to="/contact">ContactUs</NavLink>
+                            <NavLink to="/contact" onClick={handleNavClose}>ContactUs</NavLink>
                         </li>
                         <Box className="profilePic" onClick={toggleDropdown}>
                             {picture && (

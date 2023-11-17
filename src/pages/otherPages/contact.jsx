@@ -17,8 +17,9 @@ import {
   useColorModeValue,
   VStack,
   useToast,
+  Image,
 } from '@chakra-ui/react';
-
+import contactUs from '../../assets/contactus.svg'
 import {
   BsGithub,
   BsLinkedin,
@@ -65,137 +66,150 @@ const Contact = () => {
   };
 
   return (
-    <Flex align="center" justify="center" id="contact">
-      <Box borderRadius="lg" m={{ base: 5, md: 16, lg: 10 }} ml={"30px"}>
-        <Box>
-          <VStack spacing={{ base: 4, md: 8, lg: 20 }}>
-            <Heading fontSize={{ base: '4xl', md: '5xl' }}>
-              Get in Touch
-            </Heading>
+    <Stack direction={{ base: 'column', md: 'row-reverse' }} align="center" justify="center" gap={{ base: '2em', md: '5em', lg: '7em' }}>
 
-            <Stack spacing={{ base: 4, md: 8, lg: 20 }} direction={{ base: 'column-reverse', md: 'column-reverse' }}>
-              <Stack  align="center" justify="space-around" direction={{ base: 'row', md: 'row' }}>
-                <Tooltip label={hasCopied ? 'Email Copied!' : 'Copy Email'} closeOnClick={false} hasArrow>
-                  <IconButton
-                    aria-label="email"
-                    variant="ghost"
-                    size="lg"
-                    fontSize="3xl"
-                    icon={<MdEmail />}
-                    _hover={{
-                      bg: 'blue.500',
-                      color: useColorModeValue('white', 'gray.700'),
-                    }}
-                    onClick={onCopy}
-                    isRound
-                  />
-                </Tooltip>
+      <Flex align="center" justify="center" id="contact">
+        <Box borderRadius="lg" m={{ base: 5, md: 16, lg: 10 }} ml={{ base: "0", md: "30px", lg: "10px" }}>
+          <Box>
 
-                <Box as="a" href="#">
-                  <IconButton
-                    aria-label="github"
-                    variant="ghost"
-                    size="lg"
-                    fontSize="3xl"
-                    icon={<BsGithub />}
-                    _hover={{
-                      bg: 'blue.500',
-                      color: useColorModeValue('white', 'gray.700'),
-                    }}
-                    isRound
-                  />
-                </Box>
+            <VStack spacing={{ base: 4, md: 8, lg: 20 }}>
+              <Heading fontSize={{ base: '4xl', md: '5xl' }}>
+                Get in Touch
+              </Heading>
 
-                <Box as="a" href="#">
-                  <IconButton
-                    aria-label="twitter"
-                    variant="ghost"
-                    size="lg"
-                    icon={<BsTwitter size="28px" />}
-                    _hover={{
-                      bg: 'blue.500',
-                      color: useColorModeValue('white', 'gray.700'),
-                    }}
-                    isRound
-                  />
-                </Box>
 
-                <Box as="a" href="#">
-                  <IconButton
-                    aria-label="linkedin"
-                    variant="ghost"
-                    size="lg"
-                    icon={<BsLinkedin size="28px" />}
-                    _hover={{
-                      bg: 'blue.500',
-                      color: useColorModeValue('white', 'gray.700'),
-                    }}
-                    isRound
-                  />
+              <Stack spacing={{ base: 4, md: 8, lg: 20 }} align={'center'} justify={'center'} direction={{ base: 'column-reverse', md: 'column-reverse' }}>
+                <Stack align="center" justify="space-around" direction={{ base: 'row', md: 'row' }}>
+                  <Tooltip label={hasCopied ? 'Email Copied!' : 'Copy Email'} closeOnClick={false} hasArrow>
+                    <IconButton
+                      aria-label="email"
+                      variant="ghost"
+                      size="lg"
+                      fontSize="3xl"
+                      icon={<MdEmail />}
+                      _hover={{
+                        bg: '#fdb037',
+                        color: useColorModeValue('white', 'gray.700'),
+                      }}
+                      onClick={onCopy}
+                      isRound
+                    />
+                  </Tooltip>
+
+                  <Box as="a" href="#">
+                    <IconButton
+                      aria-label="github"
+                      variant="ghost"
+                      size="lg"
+                      fontSize="3xl"
+                      icon={<BsGithub />}
+                      _hover={{
+                        bg: '#fdb037',
+                        color: useColorModeValue('white', 'gray.700'),
+                      }}
+                      isRound
+                    />
+                  </Box>
+
+                  <Box as="a" href="#">
+                    <IconButton
+                      aria-label="twitter"
+                      variant="ghost"
+                      size="lg"
+                      icon={<BsTwitter size="28px" />}
+                      _hover={{
+                        bg: '#fdb037',
+                        color: useColorModeValue('white', 'gray.700'),
+                      }}
+                      isRound
+                    />
+                  </Box>
+
+                  <Box as="a" href="#">
+                    <IconButton
+                      aria-label="linkedin"
+                      variant="ghost"
+                      size="lg"
+                      icon={<BsLinkedin size="28px" />}
+                      _hover={{
+                        bg: '#fdb037',
+                        color: useColorModeValue('white', 'gray.700'),
+                      }}
+                      isRound
+                    />
+                  </Box>
+                </Stack>
+
+                <Box
+                  bg={useColorModeValue('white', 'gray.700')}
+                  borderRadius="lg"
+                  p={8}
+                  color={useColorModeValue('gray.700', 'whiteAlpha.900')}
+                  shadow="base"
+                  w={{ base: '22em', md: '30em' }}
+
+                >
+                  <form onSubmit={handleSubmit}>
+                    <VStack spacing={5}>
+                      <FormControl isRequired>
+                        <FormLabel>Name</FormLabel>
+                        <InputGroup>
+                          <InputLeftElement>
+                            <BsPerson />
+                          </InputLeftElement>
+                          <Input type="text" name="name" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} />
+                        </InputGroup>
+                      </FormControl>
+
+                      <FormControl isRequired>
+                        <FormLabel>Email</FormLabel>
+                        <InputGroup>
+                          <InputLeftElement>
+                            <MdOutlineEmail />
+                          </InputLeftElement>
+                          <Input type="email" name="email" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </InputGroup>
+                      </FormControl>
+
+                      <FormControl isRequired>
+                        <FormLabel>Message</FormLabel>
+                        <Textarea
+                          name="message"
+                          placeholder="Your Message"
+                          rows={6}
+                          resize="none"
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                        />
+                      </FormControl>
+
+                      <Button
+                        colorScheme="blue"
+                        bg="#fdb037"
+                        color="white"
+                        _hover={{
+                          bg: '#FA9E0A',
+                        }}
+                        width="full"
+                        type="submit"
+                      >
+                        Send Message
+                      </Button>
+                    </VStack>
+                  </form>
                 </Box>
               </Stack>
+            </VStack>
 
-              <Box
-                bg={useColorModeValue('white', 'gray.700')}
-                borderRadius="lg"
-                p={8}
-                color={useColorModeValue('gray.700', 'whiteAlpha.900')}
-                shadow="base"
-              >
-                <form onSubmit={handleSubmit}>
-                  <VStack spacing={5}  w={'23em'}>
-                    <FormControl isRequired>
-                      <FormLabel>Name</FormLabel>
-                      <InputGroup>
-                        <InputLeftElement>
-                          <BsPerson />
-                        </InputLeftElement>
-                        <Input type="text" name="name" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} />
-                      </InputGroup>
-                    </FormControl>
-
-                    <FormControl isRequired>
-                      <FormLabel>Email</FormLabel>
-                      <InputGroup>
-                        <InputLeftElement>
-                          <MdOutlineEmail />
-                        </InputLeftElement>
-                        <Input type="email" name="email" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                      </InputGroup>
-                    </FormControl>
-
-                    <FormControl isRequired>
-                      <FormLabel>Message</FormLabel>
-                      <Textarea
-                        name="message"
-                        placeholder="Your Message"
-                        rows={6}
-                        resize="none"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                      />
-                    </FormControl>
-
-                    <Button
-                      colorScheme="blue"
-                      bg="blue.400"
-                      color="white"
-                      _hover={{
-                        bg: 'blue.500',
-                      }}
-                      width="full"
-                      type="submit"
-                    >
-                      Send Message
-                    </Button>
-                  </VStack>
-                </form>
-              </Box>
-            </Stack>
-          </VStack>
+          </Box>
         </Box>
-      </Box>
-    </Flex>
+      </Flex>
+      <Image
+        src={contactUs}
+        boxSize={{ base: "20em", sm: "25em", md: "30em", lg: "40em", xl: "55em" }}
+        display={{ base: 'none', sm: 'block', md: 'block', lg: 'block', xl: 'block' }}
+      />
+    </Stack>
   );
 };
 
