@@ -1,5 +1,6 @@
 import { Flex, Box, Text, Link, Icon, Stack } from '@chakra-ui/react';
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 
 export const Footer = () => {
     return (
@@ -44,19 +45,19 @@ export const Footer = () => {
                 </Text>
                 <Flex align={'center'} justify={'center'} flexDirection={'column'}>
                     <Text>
-                        <Link href="/" mr={3} _hover={{ color: 'orange' }}>
+                        <NavLink to="/" mr={3} _hover={{ color: 'orange' }}>
                             Home
-                        </Link>
+                        </NavLink>
                     </Text>
                     <Text>
-                        <Link href="/tracker" mr={3} _hover={{ color: 'orange' }}>
+                        <NavLink to="/tracker" mr={3} _hover={{ color: 'orange' }}>
                             Tracker
-                        </Link>
+                        </NavLink>
                         <Text>
                         </Text>
-                        <Link href="/contact" _hover={{ color: 'orange' }}>
+                        <NavLink to="/contact" _hover={{ color: 'orange' }}>
                             Contact
-                        </Link>
+                        </NavLink>
                     </Text>
                 </Flex>
             </Box>
