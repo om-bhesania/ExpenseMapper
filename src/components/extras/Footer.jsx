@@ -44,17 +44,17 @@ export const Footer = () => {
                 </Text>
                 <Flex align={'center'} justify={'center'} flexDirection={'column'}>
                     <Text>
-                        <Link href="/" mr={3} _hover={{ color: 'orange' }}>
+                        <Link to="/" mr={3} _hover={{ color: 'orange' }}>
                             Home
                         </Link>
                     </Text>
                     <Text>
-                        <Link href="/tracker" mr={3} _hover={{ color: 'orange' }}>
+                        <Link to="/tracker" mr={3} _hover={{ color: 'orange' }}>
                             Tracker
                         </Link>
                         <Text>
                         </Text>
-                        <Link href="/contact" _hover={{ color: 'orange' }}>
+                        <Link to="/contact" _hover={{ color: 'orange' }}>
                             Contact
                         </Link>
                     </Text>
