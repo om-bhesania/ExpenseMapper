@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useGetUserInfo } from "../../hooks/useGetUserInfo";
 import { useAddTransactions } from "../../hooks/useAddTransactions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGamepad, faCapsules, faShoppingBasket, faHamburger, faFileInvoiceDollar, faMobileAlt, faCreditCard, faMoneyCheckAlt, faEllipsisH, faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
+import { faGamepad, faCapsules, faShoppingBasket, faHamburger, faFileInvoiceDollar, faMobileAlt, faCreditCard, faMoneyCheckAlt,  faIndianRupeeSign, faQuestionCircle, faVestPatches } from '@fortawesome/free-solid-svg-icons';
 
 import './scss/tracker.css'
 import {
@@ -21,6 +21,7 @@ import {
 import { AddIcon } from '@chakra-ui/icons'
 import waitingBg from '../../assets/waiting.svg'
 import AuthMobile from "../auth/indexMobile";
+import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
 
 const Tracker = () => {
     const toast = useToast();
@@ -42,8 +43,10 @@ const Tracker = () => {
         recharge: faMobileAlt,
         subscription: faCreditCard,
         tax: faMoneyCheckAlt,
+        Clothing: faVestPatches ,
+        Accessories: faBriefcase ,
         Income: faIndianRupeeSign,
-        other: faEllipsisH,
+        other: faQuestionCircle,
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
