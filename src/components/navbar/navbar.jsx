@@ -67,7 +67,21 @@ const Navbar = () => {
             setClicked(false); // Close the navbar after clicking a link
         }
     };
-
+    const handleTodoClick = () => {
+        if (!picture) {
+            toast({
+                title: 'Please Login to access Todo List',
+                status: 'warning',
+                position: 'top',
+                isClosable: true,
+            });
+            setClicked(false);
+        } else {
+            // Navigate to the Tracker page
+            navigate("/todo");
+            setClicked(false); // Close the navbar after clicking a link
+        }
+    };
     const handleClickOutside = (event) => {
         if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
             // Click outside the navbar, close it
@@ -113,6 +127,10 @@ const Navbar = () => {
                         </li> */}
                         <li id='links'>
                             <NavLink to="/tracker" onClick={handleTrackerClick}>Tracker</NavLink>
+                        </li>
+                        
+                        <li id='links'>
+                            <NavLink to="/todo" onClick={handleTodoClick}>Todo</NavLink>
                         </li>
                         <li id='links'>
                             <NavLink to="/contact" onClick={handleNavClose}>ContactUs</NavLink>
