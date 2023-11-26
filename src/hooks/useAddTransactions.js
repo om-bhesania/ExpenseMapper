@@ -7,6 +7,7 @@ import { useGetUserInfo } from "./useGetUserInfo";
 export const useAddTransactions = () => {
   const transactionCollectionRef = collection(db, "transactions");
   const ContactCollectionRef = collection(db, "contactUs");
+  const TaskCollectionRef = collection(db, "Tasks");
   const { userID } = useGetUserInfo();
 
   const addTransaction = async ({
@@ -39,5 +40,14 @@ export const useAddTransactions = () => {
       createdAt: serverTimestamp(),
     });
   };
-  return { addTransaction,addContactUs };
-};
+    const addTask = async ({
+      newTask,
+    }) => {
+      await addDoc(TaskCollectionRef, {
+        userID,
+        newTask,
+        createdAt: serverTimestamp(),
+      });
+    };
+    return { addTransaction, addContactUs ,addTask};
+  };

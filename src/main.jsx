@@ -15,8 +15,8 @@ const colors = {
 }
 const fontFamily = {
   brand: {
-    100: "Vollkorn serif",
-    200: "DM Serif Display",
+    bebas: "Bebas Neue, sans-serif;",
+    Montserrat: "Montserrat Alternates, sans-serif",
   }
 }
 

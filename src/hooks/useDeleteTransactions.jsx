@@ -1,3 +1,5 @@
+//useDeleteTransactions
+
 import { db } from "../config/firebase-config";
 import { deleteDoc, doc } from "firebase/firestore";
 import { useGetUserInfo } from "./useGetUserInfo";
@@ -23,5 +25,22 @@ export const useDeleteTransaction = () => {
     }
   };
 
-  return { deleteTransaction };
+  const deleteTask = async (taskId) => {
+    try {
+      const taskDocRef = doc(db, 'Tasks', taskId);
+      const taskDoc = await getDoc(taskDocRef);
+
+      if (taskDoc.exists() && taskDoc.data().userID === userID) {
+        await deleteDoc(taskDocRef);
+        console.log('Task deleted successfully');
+      } else {
+        console.log('Task not found or unauthorized to delete');
+      }
+    } catch (error) {
+      console.error('Error deleting task:', error);
+      throw new Error('Failed to delete task');
+    }
+  };
+
+  return { deleteTransaction, deleteTask };
 };

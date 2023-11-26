@@ -22,9 +22,9 @@ import {
 import contactUs from '../../assets/contactus.svg'
 import {
   BsGithub,
+  BsInstagram,
   BsLinkedin,
   BsPerson,
-  BsTwitter,
 } from 'react-icons/bs';
 
 import { MdEmail, MdOutlineEmail } from 'react-icons/md';
@@ -93,15 +93,17 @@ const Contact = () => {
                       }}
                       onClick={onCopy}
                       isRound
+                      transition={'ease-in 0.3s'}
                     />
                   </Tooltip>
 
-                  <Box as="a" href="#">
+                  <Box as="a" href="https://github.com/om-bhesania" target='_blank'>
                     <IconButton
                       aria-label="github"
                       variant="ghost"
                       size="lg"
                       fontSize="3xl"
+                      transition={'ease-in 0.3s'}
                       icon={<BsGithub />}
                       _hover={{
                         bg: '#fdb037',
@@ -110,13 +112,13 @@ const Contact = () => {
                       isRound
                     />
                   </Box>
-
-                  <Box as="a" href="#">
+                  <Box as="a" href="https://www.instagram.com/om_bhesania/" target='_blank'>
                     <IconButton
-                      aria-label="twitter"
+                      aria-label="linkedin"
+                      transition={'ease-in 0.3s'}
                       variant="ghost"
                       size="lg"
-                      icon={<BsTwitter size="28px" />}
+                      icon={<BsInstagram size="28px" />}
                       _hover={{
                         bg: '#fdb037',
                         color: useColorModeValue('white', 'gray.700'),
@@ -124,8 +126,7 @@ const Contact = () => {
                       isRound
                     />
                   </Box>
-
-                  <Box as="a" href="#">
+                  <Box as="a" href="https://www.linkedin.com/in/om-bhesania/" target='_blank'>
                     <IconButton
                       aria-label="linkedin"
                       variant="ghost"

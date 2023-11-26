@@ -13,7 +13,7 @@ const Home = () => {
   }
   return (
     <>
-      <Box w={"90%"} margin={"auto"} display={'flex'} justifyContent={'center'} alignItems={'center'} >
+      <Box w={"90%"} margin={"auto"} display={'flex'} justifyContent={'center'} alignItems={'center'} h={'76.3vh'} mt={{md:'0em',base:'5em'}}>
 
         <Stack direction={{ md: 'row-reverse', base: 'column' }} align={'center'} w={{ md: '', base: '100%' }} mt={{ base: '-1.5em', md: '0' }}>
           <Flex
