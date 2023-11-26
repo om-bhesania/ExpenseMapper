@@ -18,15 +18,17 @@ import {
   Tooltip,
   Image,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAddTransactions } from '../../hooks/useAddTransactions';
+import { useGetUserInfo } from '../../hooks/useGetUserInfo';
 import { useGetTransactions } from '../../hooks/useGetTransactions';
 import { useDeleteTransaction } from '../../hooks/useDeleteTransactions';
 import { useUpdateTransaction } from '../../hooks/useUpdateTransaction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faSquareMinus } from '@fortawesome/free-solid-svg-icons';
 import AuthMobile from '../../pages/auth/indexMobile';
-import waitingBg from '../../assets/waiting.svg'
+import waitingBg from '../../assets/waiting.svg';
+
 const EditTaskModal = ({ isOpen, onClose, onSave, task }) => {
   const [editedTask, setEditedTask] = useState(task.newTask);
 
@@ -61,12 +63,21 @@ const EditTaskModal = ({ isOpen, onClose, onSave, task }) => {
 export const Todo = () => {
   const { updateTask } = useUpdateTransaction();
   const { addTask } = useAddTransactions();
-  const { tasks, userId } = useGetTransactions();
+  const {
+    tasks,
+    userId,
+    getTasks,
+  } = useGetTransactions();
   const toast = useToast();
   const [newTask, setNewTask] = useState('');
   const { deleteTask } = useDeleteTransaction();
   const [clickedTasks, setClickedTasks] = useState(Array(tasks.length).fill(false));
   const [editTaskId, setEditTaskId] = useState(null);
+  const { picture } = useGetUserInfo();
+
+  useEffect(() => {
+    getTasks(); // Fetch tasks when the component mounts or userId changes
+  }, [userId]);
 
   const userTasks = tasks.filter((task) => task.userId === userId);
 
@@ -157,14 +168,15 @@ export const Todo = () => {
 
   return (
     <>
-      {name ? (
+      {picture ? (
         <>
           <Box
             gap={'1em'}
             p={4}
+            h={{base:'',md:'71.6vh'}}
             display={'flex'}
             alignItems={'center'}
-            justifyContent={'center'}
+            justifyContent={'flex-start'}
             flexDirection={'column'}
           >
             <Heading size={'lg'} mb={4} fontFamily={'Montserrat'}>

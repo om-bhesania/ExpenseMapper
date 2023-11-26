@@ -12,7 +12,8 @@ export const Footer = () => {
             padding="1.5rem"
             bg="gray.800"
             color="white"
-            mt={{ md: '0em', base: '4em' }}
+            mt={{ md: '0em', base: '10em' }}
+      
         >
             <Box mb={{ base: 8, md: 0 }} textAlign={'center'}>
                 <Text fontSize="2xl" fontWeight="bold" color={'orange'}>
