@@ -7,8 +7,11 @@ import Home from './pages/otherPages/home';
 import About from './pages/otherPages/about';
 import Contact from './pages/otherPages/contact';
 import Tracker from './pages/otherPages/tracker';
+import { TodoList } from './pages/otherPages/todo-list';
 import AuthMobile from './pages/auth/indexMobile';
 import { ParticleAnimation } from './components/particles/particles';
+
+
 function App() {
 
   return (
@@ -21,6 +24,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/tracker" element={<Tracker />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/todo" element={<TodoList />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/authmobile" element={<AuthMobile />} />
             <Route path="/dashboard" element={<Dashboard />} />
