@@ -13,6 +13,7 @@ export const useGetTransactions = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [tasks, setNewTasks] = useState([]);
   const [transactionTotals, setTransactionTotals] = useState({
     balance: 0.0,
     income: 0.0,
@@ -23,11 +24,11 @@ export const useGetTransactions = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTransactionType, setSelectedTransactionType] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [tasks, setTasks] = useState([]);
+
   const { userID } = useGetUserInfo();
 
   const transactionCollectionRef = collection(db, "transactions");
-  const taskCollectionRef = collection(db, "Tasks"); // Assuming the collection name is "Tasks"
+  const TaskCollectionRef = collection(db, "Tasks");
 
   const filterTransactions = () => {
     // Implement your filtering logic here
@@ -53,24 +54,23 @@ export const useGetTransactions = () => {
   };
 
   const getTransactions = async () => {
-    setIsLoading(true);
-
-    let unsubscribeTransactions;
-    let unsubscribeTasks;
-
+    setIsLoading(true); // Set loading to true when fetching data
+    let unsubscribe;
     try {
-      // Fetch transactions
+      // Build the base query
       let queryTransactions = query(
         transactionCollectionRef,
         where("userID", "==", userID),
         orderBy("createdAt")
       );
 
+      // Apply filters based on selectedDate
       if (selectedDate) {
         const startDate = new Date(selectedDate + "T00:00:00");
         const endDate = new Date(selectedDate + "T23:59:59");
 
         if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+          // Both startDate and endDate are valid dates
           queryTransactions = query(
             queryTransactions,
             where("createdAt", ">=", startDate),
@@ -81,6 +81,7 @@ export const useGetTransactions = () => {
         }
       }
 
+      // Apply filters based on selectedTransactionType
       if (selectedTransactionType) {
         queryTransactions = query(
           queryTransactions,
@@ -88,6 +89,7 @@ export const useGetTransactions = () => {
         );
       }
 
+      // Apply filters based on selectedCategory
       if (selectedCategory) {
         queryTransactions = query(
           queryTransactions,
@@ -95,7 +97,7 @@ export const useGetTransactions = () => {
         );
       }
 
-      unsubscribeTransactions = onSnapshot(queryTransactions, (snapshot) => {
+      unsubscribe = onSnapshot(queryTransactions, (snapshot) => {
         let docs = [];
         let totalIncome = 0;
         let totalExpenses = 0;
@@ -128,40 +130,47 @@ export const useGetTransactions = () => {
 
         setSinIncome(singleIncome);
         setSinExpenses(singleExpenses);
-        filterTransactions();
+        filterTransactions(); // Apply filters after fetching transactions
+        setIsLoading(false); // Set loading to false after data is loaded
       });
+    } catch (err) {
+      console.error(err.message);
+      setIsLoading(false); // Set loading to false in case of an error
+    }
 
-      // Fetch tasks (modified to filter tasks for the currently logged-in user)
-      let queryTasks = query(
-        taskCollectionRef,
+    return () => unsubscribe();
+  };
+
+  const getTasks = async () => {
+    setIsLoading(true);
+    let unsubscribe;
+    try {
+      // Assuming TaskCollectionRef is defined somewhere in your code
+      const queryTasks = query(
+        TaskCollectionRef,
         where("userID", "==", userID),
         orderBy("createdAt")
       );
 
-      unsubscribeTasks = onSnapshot(queryTasks, (snapshot) => {
-        let taskDocs = [];
-
+      unsubscribe = onSnapshot(queryTasks, (snapshot) => {
+        let docs = [];
         snapshot.forEach((doc) => {
-          const taskData = doc.data();
-          const taskId = doc.id;
-
-          taskDocs.push({ ...taskData, id: taskId });
+          const data = doc.data();
+          const id = doc.id;
+          docs.push({ ...data, id });
         });
-
-        setTasks(taskDocs);
+        setNewTasks(docs);
+        setIsLoading(false);
       });
     } catch (err) {
-      console.error(err.message);
+      console.error("Error fetching tasks:", err.message);
       setIsLoading(false);
     }
-
-    return () => {
-      unsubscribeTransactions && unsubscribeTransactions();
-      unsubscribeTasks && unsubscribeTasks();
-    };
+    return () => unsubscribe();
   };
 
   const applyFilters = () => {
+    // Re-fetch transactions with filters
     getTransactions();
   };
 
@@ -189,8 +198,9 @@ export const useGetTransactions = () => {
     setSelectedTransactionType,
     selectedCategory,
     setSelectedCategory,
-    tasks, // Added tasks to the return object
     applyFilters,
     resetFilters,
+    getTasks,
+    tasks,
   };
 };
